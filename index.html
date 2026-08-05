@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maverick Juris — Advocates &amp; Legal Consultants, Karachi</title>
+<meta name="description" content="Maverick Juris is a multi-practice law firm in Karachi handling Criminal, Civil, Family, Corporate, Tax, Property, IP &amp; Cybercrime matters. Book a consultation on WhatsApp.">
+
+<!-- Google Fonts: Fraunces (serif, display/headings) + Inter (sans, body) + JetBrains Mono (data/legal-code text) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   DESIGN TOKENS
+   Theme: "The Docket" — dark chancery / courtroom ledger
+   Background: near-black charcoal with a faint warm undertone
+   Accent: aged brass/gold (seal & stamp motif)
+   Signature element: offence-finder results rendered as a
+   wax-stamped case docket card (ledger rule lines, brass seal
+   corner, monospace section numbers) — echoes real case files.
+   ========================================================= */
+:root{
+  --ink-950:#0a0b0d;
+  --ink-900:#111316;
+  --ink-850:#161a1e;
+  --ink-800:#1c2126;
+  --ink-700:#282f36;
+  --ink-600:#3a434c;
+  --line:#2a3038;
+  --paper:#eee9df;
+  --paper-dim:#c9c3b6;
+  --paper-mute:#8d8a80;
+  --brass:#c8a44d;
+  --brass-bright:#e0bd68;
+  --brass-dim:#8a7139;
+  --seal-red:#7a2b2b;
+  --ok:#7a9b6e;
+
+  --font-display:'Fraunces', Georgia, serif;
+  --font-body:'Inter', -apple-system, sans-serif;
+  --font-mono:'JetBrains Mono', ui-monospace, monospace;
+
+  --container:1180px;
+  --radius:2px;
+  --shadow-soft: 0 20px 60px -20px rgba(0,0,0,0.6);
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+}
+body{
+  margin:0;
+  background:var(--ink-950);
+  color:var(--paper);
+  font-family:var(--font-body);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;margin:0;color:var(--paper);}
+p{margin:0;}
+ul{margin:0;padding:0;list-style:none;}
+button,input,textarea,select{font-family:inherit;font-size:inherit;color:inherit;}
+:focus-visible{outline:2px solid var(--brass-bright);outline-offset:3px;}
+
+.container{max-width:var(--container);margin:0 auto;padding:0 24px;}
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:0.72rem;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--brass);
+  display:flex;align-items:center;gap:10px;
+}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--brass-dim);display:inline-block;}
+
+.section{padding:96px 0;position:relative;}
+.section-head{max-width:640px;margin-bottom:56px;}
+.section-head h2{font-size:clamp(1.9rem,3.5vw,2.6rem);margin-top:14px;letter-spacing:-0.01em;}
+.section-head p{color:var(--paper-dim);margin-top:14px;font-size:1.02rem;}
+
+.divider-rule{border:none;border-top:1px solid var(--line);margin:0;}
+
+/* subtle ledger-line texture used behind a couple of sections */
+.ledger-bg{
+  background-image: repeating-linear-gradient(to bottom, transparent, transparent 43px, rgba(200,164,77,0.05) 44px);
+}
+
+/* scroll reveal */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.7s ease, transform 0.7s ease;}
+.reveal.is-visible{opacity:1;transform:translateY(0);}
+
+/* buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:14px 26px;border-radius:var(--radius);
+  font-family:var(--font-body);font-weight:600;font-size:0.92rem;letter-spacing:0.01em;
+  border:1px solid transparent;cursor:pointer;transition:transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  white-space:nowrap;
+}
+.btn:hover{transform:translateY(-2px);}
+.btn-primary{background:var(--brass);color:var(--ink-950);}
+.btn-primary:hover{background:var(--brass-bright);}
+.btn-outline{background:transparent;border-color:var(--line);color:var(--paper);}
+.btn-outline:hover{border-color:var(--brass);color:var(--brass-bright);}
+.btn-sm{padding:10px 18px;font-size:0.82rem;}
+
+/* =========================
+   HEADER
+   ========================= */
+.site-header{
+  position:sticky;top:0;z-index:200;
+  background:rgba(10,11,13,0.86);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.header-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 24px;max-width:var(--container);margin:0 auto;
+}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand-mark{
+  width:38px;height:38px;border:1px solid var(--brass-dim);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);color:var(--brass);font-size:1.05rem;flex:none;
+}
+.brand-name{font-family:var(--font-display);font-size:1.18rem;letter-spacing:0.01em;}
+.brand-name span{color:var(--brass);}
+.brand-sub{display:block;font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.14em;color:var(--paper-mute);text-transform:uppercase;margin-top:2px;}
+
+.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-links a{font-size:0.88rem;color:var(--paper-dim);transition:color 0.2s ease;position:relative;}
+.nav-links a:hover{color:var(--brass-bright);}
+
+.header-cta{display:flex;align-items:center;gap:14px;}
+.header-phone{
+  font-family:var(--font-mono);font-size:0.82rem;color:var(--paper-dim);
+  display:flex;align-items:center;gap:6px;
+}
+.header-phone:hover{color:var(--brass-bright);}
+
+.nav-toggle{
+  display:none;background:none;border:1px solid var(--line);border-radius:var(--radius);
+  width:42px;height:38px;align-items:center;justify-content:center;cursor:pointer;
+}
+.nav-toggle span, .nav-toggle span::before, .nav-toggle span::after{
+  content:"";display:block;width:18px;height:2px;background:var(--paper);position:relative;transition:0.2s ease;
+}
+.nav-toggle span::before{position:absolute;top:-6px;}
+.nav-toggle span::after{position:absolute;top:6px;}
+.nav-toggle.open span{background:transparent;}
+.nav-toggle.open span::before{top:0;transform:rotate(45deg);}
+.nav-toggle.open span::after{top:0;transform:rotate(-45deg);}
+
+@media (max-width:900px){
+  .nav-links{
+    position:fixed;inset:64px 0 0 0;background:var(--ink-950);
+    flex-direction:column;justify-content:flex-start;padding:40px 24px;gap:26px;
+    transform:translateY(-12px);opacity:0;pointer-events:none;transition:0.25s ease;
+    border-top:1px solid var(--line);
+  }
+  .nav-links.open{transform:translateY(0);opacity:1;pointer-events:auto;}
+  .nav-links a{font-size:1.15rem;}
+  .header-phone{display:none;}
+  .nav-toggle{display:flex;}
+}
+
+/* =========================
+   HERO
+   ========================= */
+.hero{
+  position:relative;
+  padding:110px 0 100px;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse 900px 500px at 78% -10%, rgba(200,164,77,0.14), transparent 60%),
+    linear-gradient(180deg, var(--ink-950), var(--ink-900));
+}
+.hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;align-items:center;}
+.hero-kicker{margin-bottom:22px;}
+.hero h1{
+  font-size:clamp(2.4rem,5vw,3.7rem);
+  line-height:1.08;letter-spacing:-0.015em;
+}
+.hero h1 em{font-style:italic;color:var(--brass-bright);}
+.hero-lede{
+  margin-top:24px;color:var(--paper-dim);font-size:1.1rem;max-width:520px;
+}
+.hero-actions{display:flex;gap:16px;margin-top:38px;flex-wrap:wrap;}
+.hero-meta{
+  display:flex;gap:34px;margin-top:52px;padding-top:28px;border-top:1px solid var(--line);flex-wrap:wrap;
+}
+.hero-meta div strong{display:block;font-family:var(--font-display);font-size:1.6rem;color:var(--brass-bright);}
+.hero-meta div span{font-size:0.78rem;color:var(--paper-mute);text-transform:uppercase;letter-spacing:0.08em;}
+
+/* the "seal" visual — signature element echoed in hero */
+.hero-seal-wrap{display:flex;align-items:center;justify-content:center;position:relative;}
+.hero-seal{
+  width:min(100%,360px);aspect-ratio:1/1;border-radius:50%;
+  border:1px solid var(--brass-dim);
+  display:flex;align-items:center;justify-content:center;position:relative;
+  background:radial-gradient(circle at 35% 30%, rgba(200,164,77,0.08), transparent 60%);
+}
+.hero-seal::before{
+  content:"";position:absolute;inset:16px;border:1px solid rgba(200,164,77,0.35);border-radius:50%;
+}
+.hero-seal::after{
+  content:"";position:absolute;inset:34px;border:1px dashed rgba(200,164,77,0.25);border-radius:50%;
+}
+.hero-seal-text{
+  font-family:var(--font-display);text-align:center;color:var(--brass);
+}
+.hero-seal-text .big{display:block;font-size:2.6rem;line-height:1;}
+.hero-seal-text .small{
+  display:block;font-family:var(--font-mono);font-size:0.62rem;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--paper-mute);margin-top:10px;
+}
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:48px;}
+  .hero-seal-wrap{order:-1;}
+  .hero-seal{width:220px;}
+}
+
+/* =========================
+   ABOUT
+   ========================= */
+.about-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:64px;align-items:start;}
+.about-pillars{display:grid;gap:26px;margin-top:36px;}
+.pillar{display:flex;gap:18px;padding-bottom:26px;border-bottom:1px solid var(--line);}
+.pillar:last-child{border-bottom:none;padding-bottom:0;}
+.pillar-num{font-family:var(--font-mono);color:var(--brass-dim);font-size:0.85rem;padding-top:4px;}
+.pillar h4{font-size:1.05rem;margin-bottom:6px;}
+.pillar p{color:var(--paper-dim);font-size:0.94rem;}
+.about-copy p + p{margin-top:16px;}
+.about-copy{color:var(--paper-dim);font-size:1.02rem;}
+.about-copy strong{color:var(--paper);}
+@media (max-width:900px){.about-grid{grid-template-columns:1fr;}}
+
+/* =========================
+   PRACTICE AREAS
+   ========================= */
+.practice-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--line);border:1px solid var(--line);
+}
+.practice-card{
+  background:var(--ink-900);padding:34px 30px;
+  transition:background 0.25s ease;
+  position:relative;
+}
+.practice-card:hover{background:var(--ink-850);}
+.practice-icon{
+  width:46px;height:46px;border:1px solid var(--brass-dim);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;color:var(--brass);margin-bottom:22px;
+}
+.practice-card h3{font-size:1.12rem;margin-bottom:10px;}
+.practice-card p{color:var(--paper-dim);font-size:0.9rem;}
+@media (max-width:900px){.practice-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:600px){.practice-grid{grid-template-columns:1fr;}}
+
+/* =========================
+   OFFENCE FINDER  (signature element)
+   ========================= */
+.finder-panel{
+  background:var(--ink-900);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;
+}
+.finder-search{
+  padding:26px;border-bottom:1px solid var(--line);
+  display:flex;gap:14px;align-items:center;background:var(--ink-850);
+}
+.finder-search input{
+  flex:1;background:var(--ink-950);border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px 16px;color:var(--paper);font-size:0.98rem;
+}
+.finder-search input::placeholder{color:var(--paper-mute);}
+.finder-search input:focus{border-color:var(--brass);}
+.finder-hint{font-size:0.78rem;color:var(--paper-mute);padding:14px 26px 0;}
+
+.finder-results{padding:10px 0;max-height:640px;overflow-y:auto;}
+.finder-empty{padding:48px 26px;text-align:center;color:var(--paper-mute);font-size:0.94rem;}
+
+/* docket-style result card */
+.docket{
+  margin:18px 26px;border:1px solid var(--line);background:var(--ink-950);
+  position:relative;padding:24px 24px 22px;
+  animation:fadeUp 0.35s ease both;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.docket::before{ /* brass corner stamp */
+  content:"";position:absolute;top:0;right:0;width:0;height:0;
+  border-style:solid;border-width:0 34px 34px 0;border-color:transparent var(--brass-dim) transparent transparent;
+  opacity:0.7;
+}
+.docket-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:6px;}
+.docket-section{
+  font-family:var(--font-mono);color:var(--brass-bright);font-size:1.5rem;letter-spacing:0.01em;
+}
+.docket-section span{display:block;font-family:var(--font-mono);font-size:0.66rem;letter-spacing:0.16em;color:var(--paper-mute);text-transform:uppercase;margin-bottom:4px;}
+.docket-name{font-family:var(--font-display);font-size:1.18rem;margin-top:2px;}
+.docket-rule{border-top:1px dashed var(--line);margin:16px 0;}
+.docket-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px 20px;margin-bottom:8px;
+}
+.docket-field span{display:block;font-family:var(--font-mono);font-size:0.66rem;letter-spacing:0.1em;color:var(--paper-mute);text-transform:uppercase;margin-bottom:5px;}
+.docket-field strong{font-size:0.94rem;font-weight:600;}
+.tag{
+  display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:20px;
+  font-size:0.78rem;font-weight:600;border:1px solid;
+}
+.tag-bailable{color:var(--ok);border-color:rgba(122,155,110,0.4);background:rgba(122,155,110,0.08);}
+.tag-nonbailable{color:#c07a6a;border-color:rgba(192,122,106,0.4);background:rgba(192,122,106,0.08);}
+.docket-cta{margin-top:18px;}
+
+@media (max-width:640px){
+  .docket-top{flex-direction:column;}
+  .docket{margin:14px 16px;padding:20px 18px;}
+}
+
+/* =========================
+   ACTS & STATUTES (accordion)
+   ========================= */
+.acts-list{border-top:1px solid var(--line);}
+.act-item{border-bottom:1px solid var(--line);}
+.act-trigger{
+  width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;
+  padding:24px 4px;background:none;border:none;text-align:left;cursor:pointer;color:var(--paper);
+}
+.act-trigger:hover .act-title{color:var(--brass-bright);}
+.act-title{font-family:var(--font-display);font-size:1.15rem;transition:color 0.2s ease;}
+.act-year{
+  font-family:var(--font-mono);font-size:0.75rem;color:var(--paper-mute);
+  border:1px solid var(--line);padding:3px 9px;border-radius:20px;flex:none;
+}
+.act-plus{
+  width:26px;height:26px;flex:none;border:1px solid var(--brass-dim);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;color:var(--brass);
+  position:relative;transition:transform 0.3s ease;
+}
+.act-plus::before,.act-plus::after{content:"";position:absolute;background:var(--brass);}
+.act-plus::before{width:10px;height:1px;}
+.act-plus::after{width:1px;height:10px;transition:transform 0.3s ease;}
+.act-item.open .act-plus::after{transform:rotate(90deg);}
+.act-item.open .act-plus{border-color:var(--brass-bright);}
+
+.act-panel{max-height:0;overflow:hidden;transition:max-height 0.35s ease;}
+.act-panel-inner{padding:0 4px 26px;color:var(--paper-dim);font-size:0.95rem;max-width:760px;}
+.act-panel-inner a{color:var(--brass-bright);border-bottom:1px solid var(--brass-dim);}
+
+/* =========================
+   TESTIMONIALS
+   ========================= */
+.editable-note{
+  font-family:var(--font-mono);font-size:0.72rem;color:var(--paper-mute);
+  border:1px dashed var(--line);padding:8px 14px;border-radius:var(--radius);display:inline-block;margin-bottom:36px;
+}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.testi-card{
+  background:var(--ink-900);border:1px solid var(--line);padding:30px 26px;position:relative;
+}
+.testi-quote{font-family:var(--font-display);font-size:2.4rem;color:var(--brass-dim);line-height:1;display:block;margin-bottom:10px;}
+.testi-card p{color:var(--paper-dim);font-size:0.95rem;font-style:italic;}
+.testi-foot{display:flex;justify-content:space-between;margin-top:22px;padding-top:16px;border-top:1px solid var(--line);}
+.testi-foot strong{font-size:0.88rem;}
+.testi-foot span{display:block;font-size:0.78rem;color:var(--paper-mute);}
+.testi-result{font-family:var(--font-mono);font-size:0.72rem;color:var(--brass);text-transform:uppercase;letter-spacing:0.06em;}
+@media (max-width:900px){.testi-grid{grid-template-columns:1fr;}}
+
+/* =========================
+   CONTACT
+   ========================= */
+.contact-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:60px;}
+.contact-info{display:grid;gap:22px;align-content:start;}
+.info-row{display:flex;gap:16px;padding-bottom:20px;border-bottom:1px solid var(--line);}
+.info-row:last-child{border:none;}
+.info-icon{width:38px;height:38px;flex:none;border:1px solid var(--brass-dim);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--brass);}
+.info-row h4{font-size:0.95rem;margin-bottom:4px;}
+.info-row p, .info-row a{color:var(--paper-dim);font-size:0.9rem;}
+.info-row a:hover{color:var(--brass-bright);}
+
+.form-panel{background:var(--ink-900);border:1px solid var(--line);padding:36px;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.form-field{display:flex;flex-direction:column;gap:8px;}
+.form-field.full{grid-column:1/-1;}
+.form-field label{font-size:0.8rem;color:var(--paper-mute);text-transform:uppercase;letter-spacing:0.06em;}
+.form-field input,.form-field textarea{
+  background:var(--ink-950);border:1px solid var(--line);border-radius:var(--radius);
+  padding:13px 14px;color:var(--paper);
+}
+.form-field input:focus,.form-field textarea:focus{border-color:var(--brass);}
+.form-field textarea{resize:vertical;min-height:110px;}
+.form-submit{margin-top:26px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+.form-note{font-size:0.78rem;color:var(--paper-mute);}
+
+.form-success{
+  display:none;text-align:center;padding:50px 20px;
+}
+.form-success.show{display:block;}
+.form-success .check{
+  width:56px;height:56px;border-radius:50%;border:1px solid var(--brass);color:var(--brass);
+  display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:1.4rem;
+}
+.form-success h3{font-size:1.3rem;margin-bottom:10px;}
+.form-success p{color:var(--paper-dim);font-size:0.94rem;max-width:380px;margin:0 auto;}
+
+@media (max-width:900px){.contact-grid{grid-template-columns:1fr;}}
+@media (max-width:560px){.form-grid{grid-template-columns:1fr;}}
+
+/* =========================
+   DISCLAIMER STRIPS
+   ========================= */
+.disclaimer{
+  display:flex;gap:12px;align-items:flex-start;
+  background:var(--ink-850);border:1px solid var(--line);border-left:2px solid var(--brass-dim);
+  padding:16px 18px;font-size:0.84rem;color:var(--paper-mute);margin-top:30px;max-width:760px;
+}
+.disclaimer strong{color:var(--paper-dim);}
+
+/* =========================
+   FLOATING WHATSAPP BUTTON
+   ========================= */
+.wa-float{
+  position:fixed;right:22px;bottom:22px;z-index:300;
+  width:60px;height:60px;border-radius:50%;
+  background:#1f8a4c;color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 12px 30px -8px rgba(0,0,0,0.6);
+  transition:transform 0.2s ease;
+}
+.wa-float:hover{transform:scale(1.06);}
+.wa-pulse{
+  position:absolute;inset:-6px;border-radius:50%;border:2px solid #1f8a4c;
+  animation:pulse 2.2s ease-out infinite;
+}
+@keyframes pulse{0%{opacity:0.6;transform:scale(0.9);}100%{opacity:0;transform:scale(1.5);}}
+
+/* =========================
+   FOOTER
+   ========================= */
+.site-footer{background:var(--ink-900);border-top:1px solid var(--line);padding:70px 0 30px;}
+.footer-grid{display:grid;grid-template-columns:1.3fr 0.8fr 0.8fr 1fr;gap:40px;}
+.footer-brand p{color:var(--paper-mute);font-size:0.88rem;margin-top:16px;max-width:280px;}
+.footer-col h5{font-size:0.8rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--brass);margin-bottom:18px;}
+.footer-col ul{display:grid;gap:11px;}
+.footer-col a{color:var(--paper-dim);font-size:0.88rem;}
+.footer-col a:hover{color:var(--brass-bright);}
+.footer-bottom{
+  margin-top:56px;padding-top:24px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;
+  font-size:0.78rem;color:var(--paper-mute);
+}
+.footer-disclaimer{max-width:760px;font-size:0.78rem;color:var(--paper-mute);margin-top:20px;line-height:1.7;}
+@media (max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;}}
+@media (max-width:560px){.footer-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- =====================================================
+     HEADER
+     ===================================================== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#top" class="brand" aria-label="Maverick Juris — home">
+      <span class="brand-mark" aria-hidden="true">M</span>
+      <span>
+        <span class="brand-name">Maverick<span> Juris</span></span>
+        <span class="brand-sub">Advocates &amp; Legal Consultants</span>
+      </span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#practice">Practice Areas</a>
+      <a href="#offence-finder">Offence Finder</a>
+      <a href="#acts">Acts &amp; Statutes</a>
+      <a href="#testimonials">Results</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="header-cta">
+      <!-- DEVELOPER NOTE (a): Replace 03434532057 everywhere in this file with the firm's real WhatsApp number, in international format without + or spaces (e.g. 923434532057) for wa.me links. -->
+      <a class="header-phone" href="tel:03434532057" aria-label="Call Maverick Juris">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        0343 4532057
+      </a>
+      <a class="btn btn-primary btn-sm wa-cta" href="#" target="_blank" rel="noopener" data-wa-generic>
+        WhatsApp Us
+      </a>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- =====================================================
+     HERO
+     ===================================================== -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">Karachi · Est. multi-practice chambers</div>
+      <h1>Serious legal counsel<br>for <em>serious</em> matters.</h1>
+      <p class="hero-lede">
+        Maverick Juris advises individuals, families and businesses across Karachi on criminal, civil,
+        corporate and property law — with the discretion and rigour a real case deserves.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary wa-cta" href="#" target="_blank" rel="noopener" data-wa-generic>
+          Book a Consultation on WhatsApp
+        </a>
+        <a class="btn btn-outline" href="#offence-finder">Search the Offence Finder ↓</a>
+      </div>
+      <div class="hero-meta">
+        <div><strong>9</strong><span>Practice Areas</span></div>
+        <div><strong>24/7</strong><span>WhatsApp Intake</span></div>
+        <div><strong>Karachi</strong><span>Based &amp; Local</span></div>
+      </div>
+    </div>
+
+    <div class="hero-seal-wrap" aria-hidden="true">
+      <div class="hero-seal">
+        <div class="hero-seal-text">
+          <span class="big">MJ</span>
+          <span class="small">Maverick Juris · Karachi</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     ABOUT / WHY MAVERICK JURIS
+     ===================================================== -->
+<section class="section" id="about">
+  <div class="container about-grid">
+    <div class="reveal">
+      <div class="eyebrow">Why Maverick Juris</div>
+      <h2 class="section-head" style="margin-bottom:0;">Counsel that treats<br>every case like the only one.</h2>
+      <div class="about-pillars">
+        <div class="pillar">
+          <span class="pillar-num">01</span>
+          <div><h4>Multi-practice depth</h4><p>Nine focused practice groups under one roof, so matters that cross domains — a property dispute with a tax angle, a family case with a cybercrime element — don't fall between firms.</p></div>
+        </div>
+        <div class="pillar">
+          <span class="pillar-num">02</span>
+          <div><h4>Direct access to counsel</h4><p>No call centre, no junior triage. Enquiries reach the firm directly over WhatsApp or the form below.</p></div>
+        </div>
+        <div class="pillar">
+          <span class="pillar-num">03</span>
+          <div><h4>Karachi courts, Karachi context</h4><p>Local filing practice, local registries, local timelines — advice grounded in how Karachi's courts actually run.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-copy reveal">
+      <p>
+        <strong>Maverick Juris</strong> is a Karachi-based chambers built for clients who need more than a
+        single specialist — families navigating a dispute that touches property and inheritance, businesses
+        registering a trademark while structuring a corporate entity, or individuals facing a criminal charge
+        who need someone to move fast.
+      </p>
+      <p>
+        Our mission is straightforward: give every client — whether an individual walking in with a police
+        report or a company preparing a contract — the same standard of preparation, the same willingness to
+        explain the process in plain language, and the same urgency a real deadline deserves.
+      </p>
+      <p>
+        We are a single firm, not a directory of independent lawyers. When you engage Maverick Juris, you
+        engage the chambers — with continuity from first consultation through to resolution.
+      </p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider-rule container">
+
+<!-- =====================================================
+     PRACTICE AREAS
+     ===================================================== -->
+<section class="section" id="practice">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">What We Handle</div>
+      <h2>Nine practice areas.<br>One firm.</h2>
+      <p>Each matter is handled by counsel focused on that area of law — briefed on your full case, not just their slice of it.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="practice-grid reveal" id="practiceGrid">
+      <!-- Practice cards are rendered from the practiceAreas array below (see PRACTICE AREAS DATA in script) -->
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     OFFENCE FINDER
+     ===================================================== -->
+<section class="section ledger-bg" id="offence-finder">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Offence Finder</div>
+      <h2>Know exactly what you're facing.</h2>
+      <p>
+        Search by offence name or Pakistan Penal Code (PPC) section to see the punishment, bail status,
+        cognizability, whether it's compoundable, and which court tries it — drawn from the Second Schedule
+        of the Code of Criminal Procedure (CrPC).
+      </p>
+    </div>
+
+    <div class="finder-panel reveal">
+      <div class="finder-search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <label for="offenceSearch" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Search offence or PPC section</label>
+        <input type="text" id="offenceSearch" placeholder="Try “theft”, “302”, “cheating”, or “489-F”…" autocomplete="off">
+      </div>
+      <p class="finder-hint">Showing common offences from the Second Schedule, CrPC. Start typing to filter.</p>
+      <div class="finder-results" id="offenceResults" aria-live="polite">
+        <!-- Results rendered by OFFENCE FINDER LOGIC in script -->
+      </div>
+    </div>
+
+    <div class="disclaimer reveal">
+      <span aria-hidden="true">⚖</span>
+      <span><strong>Not legal advice.</strong> The Offence Finder provides general information drawn from the Second Schedule of the CrPC for educational purposes only. Punishments, bail status and procedure can vary with amendments, specific facts, and the trial court's discretion. Always confirm your specific situation with a lawyer before acting.</span>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     ACTS & STATUTES LIBRARY
+     ===================================================== -->
+<section class="section" id="acts">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Reference Library</div>
+      <h2>Acts &amp; Statutes</h2>
+      <p>A running library of the Pakistani laws our matters most often draw on. Tap any act to expand a short summary.</p>
+    </div>
+
+    <div class="acts-list reveal" id="actsList">
+      <!-- Accordion items rendered from the actsAndStatutes array (see ACTS & STATUTES DATA in script) -->
+    </div>
+
+    <div class="disclaimer reveal">
+      <span aria-hidden="true">📖</span>
+      <span><strong>General information only.</strong> Summaries are simplified for readability and are not a substitute for reading the full text of each Act or for professional legal advice specific to your matter.</span>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     TESTIMONIALS / CASE RESULTS
+     ===================================================== -->
+<section class="section" id="testimonials">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Client Outcomes</div>
+      <h2>Results, in clients' words.</h2>
+    </div>
+    <!-- EDITABLE: Placeholder testimonials — replace with real, permissioned client quotes and case results before launch. -->
+    <span class="editable-note reveal">◆ Placeholder content below — replace with verified client testimonials before going live</span>
+
+    <div class="testi-grid reveal">
+      <article class="testi-card">
+        <span class="testi-quote" aria-hidden="true">“</span>
+        <p>They explained every step in plain terms and were reachable on WhatsApp even outside office hours. That mattered more than I expected during a stressful time.</p>
+        <div class="testi-foot">
+          <div><strong>A. Siddiqui</strong><span>Family Law client</span></div>
+          <span class="testi-result">Matter Resolved</span>
+        </div>
+      </article>
+      <article class="testi-card">
+        <span class="testi-quote" aria-hidden="true">“</span>
+        <p>Our trademark filing and corporate structuring were handled together, by the same team, without us having to repeat our story to two different firms.</p>
+        <div class="testi-foot">
+          <div><strong>Founder, Retail Startup</strong><span>Corporate &amp; IP client</span></div>
+          <span class="testi-result">Registration Secured</span>
+        </div>
+      </article>
+      <article class="testi-card">
+        <span class="testi-quote" aria-hidden="true">“</span>
+        <p>Bail was arranged quickly and the whole process was explained to my family so nobody was left guessing what happens next.</p>
+        <div class="testi-foot">
+          <div><strong>Client, Karachi</strong><span>Criminal Law client</span></div>
+          <span class="testi-result">Bail Granted</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     CONTACT / INQUIRY FORM
+     ===================================================== -->
+<section class="section ledger-bg" id="contact">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Get In Touch</div>
+      <h2>Tell us about your matter.</h2>
+      <p>Fill out the form or reach us directly on WhatsApp — most enquiries get an initial response the same day.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div class="info-row">
+          <div class="info-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <h4>Phone / WhatsApp</h4>
+            <!-- DEVELOPER NOTE (e): update phone display text here if the number changes -->
+            <a href="tel:03434532057">0343 4532057</a>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <h4>Office</h4>
+            <!-- DEVELOPER NOTE (e): replace with the real office address -->
+            <p>[Office Address — Suite/Floor, Street, Area], Karachi, Pakistan</p>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          </div>
+          <div>
+            <h4>Hours</h4>
+            <p>Mon – Sat, 10:00 AM – 7:00 PM · WhatsApp intake 24/7</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-panel reveal">
+        <!--
+          FORM BACKEND NOTE (b):
+          This form is JS-only and does NOT send data anywhere yet — it only
+          shows a client-side "submitted" confirmation state (see CONTACT FORM
+          LOGIC in the script below).
+
+          To wire it to a real backend, pick one:
+            1) Formspree: set <form action="https://formspree.io/f/yourFormId" method="POST">
+               and let it submit normally (remove preventDefault in JS), or fetch() it.
+            2) EmailJS: call emailjs.send(serviceId, templateId, formData) inside
+               the submit handler before showing the success state.
+            3) Vercel serverless function: fetch('/api/contact', { method:'POST',
+               body: JSON.stringify(formValues) }) from the submit handler, and
+               create /api/contact.js to forward the payload to your email/CRM.
+        -->
+        <form id="contactForm" novalidate>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="fName">Full Name</label>
+              <input type="text" id="fName" name="name" required autocomplete="name">
+            </div>
+            <div class="form-field">
+              <label for="fPhone">Phone Number</label>
+              <input type="tel" id="fPhone" name="phone" required autocomplete="tel">
+            </div>
+            <div class="form-field">
+              <label for="fCity">City</label>
+              <input type="text" id="fCity" name="city" value="Karachi" autocomplete="address-level2">
+            </div>
+            <div class="form-field">
+              <label for="fArea">Area of Law</label>
+              <input type="text" id="fArea" name="area" placeholder="e.g. Property Law">
+            </div>
+            <div class="form-field full">
+              <label for="fDesc">Case Description</label>
+              <textarea id="fDesc" name="description" required placeholder="Briefly describe your matter…"></textarea>
+            </div>
+          </div>
+          <div class="form-submit">
+            <button type="submit" class="btn btn-primary">Submit Enquiry</button>
+            <span class="form-note">We'll respond within one business day.</span>
+          </div>
+        </form>
+
+        <div class="form-success" id="formSuccess">
+          <div class="check" aria-hidden="true">✓</div>
+          <h3>Enquiry received.</h3>
+          <p>Thank you — your details have been noted. For a faster response, you can also message us directly on WhatsApp using the button in the header or bottom-right corner.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- =====================================================
+     FLOATING WHATSAPP BUTTON
+     ===================================================== -->
+<a class="wa-float wa-cta" href="#" target="_blank" rel="noopener" data-wa-generic aria-label="Chat with Maverick Juris on WhatsApp">
+  <span class="wa-pulse" aria-hidden="true"></span>
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.52 0-10 4.48-10 10 0 1.77.46 3.45 1.32 4.94L2 22l5.2-1.36A9.96 9.96 0 0 0 12.04 22c5.52 0 10-4.48 10-10s-4.48-10-10-10zm5.8 14.24c-.24.68-1.4 1.3-1.94 1.36-.5.06-1.12.08-1.8-.12-.42-.12-.96-.3-1.66-.6-2.92-1.26-4.82-4.2-4.96-4.4-.14-.2-1.18-1.58-1.18-3.02 0-1.44.76-2.14 1.02-2.44.26-.3.58-.36.78-.36h.56c.18 0 .42-.02.64.5.24.56.8 1.94.86 2.08.06.14.1.3.02.48-.08.18-.12.3-.24.46-.12.16-.26.36-.36.48-.12.14-.26.28-.1.56.16.28.7 1.18 1.54 1.92 1.06.96 1.96 1.26 2.24 1.4.28.14.44.12.6-.06.16-.18.7-.82.9-1.1.2-.28.38-.24.64-.14.26.1 1.64.78 1.92.92.28.14.46.2.52.32.06.14.06.76-.18 1.44z"/></svg>
+</a>
+
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">M</span>
+          <span class="brand-name">Maverick<span> Juris</span></span>
+        </div>
+        <p>A multi-practice law firm based in Karachi, Pakistan — Criminal, Civil, Family, Corporate, Property, Tax, IP and Cybercrime matters under one roof.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Firm</h5>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#practice">Practice Areas</a></li>
+          <li><a href="#testimonials">Case Results</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="#offence-finder">Offence Finder</a></li>
+          <li><a href="#acts">Acts &amp; Statutes</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="tel:03434532057">0343 4532057</a></li>
+          <!-- DEVELOPER NOTE (e): update Facebook Page URL and address below -->
+          <li><a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook Page</a></li>
+          <li><span style="color:var(--paper-mute);">[Office Address], Karachi</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="footer-disclaimer">
+      <strong style="color:var(--paper-dim);">Disclaimer:</strong> The content on this website, including the
+      Offence Finder and Acts &amp; Statutes library, is provided for general informational purposes only and
+      does not constitute legal advice. No lawyer-client relationship is formed by using this site or
+      submitting the contact form. Laws referenced may have been amended since publication — always consult
+      Maverick Juris or another qualified advocate about the specifics of your matter.
+    </p>
+
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Maverick Juris. All rights reserved.</span>
+      <span>Karachi, Pakistan</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   CONFIG — DEVELOPER NOTE (a)
+   Single source of truth for the WhatsApp number used across
+   the header CTA, hero CTA, floating button, and every
+   Offence Finder "Ask on WhatsApp" link.
+   Replace with the real number in international format
+   (country code, no + , no spaces, no leading 0),
+   e.g. "923434532057" for +92 343 4532057.
+   ========================================================= */
+const WHATSAPP_NUMBER = "923434532057"; // TODO: confirm/replace with firm's live WhatsApp number
+const WHATSAPP_GENERIC_MESSAGE = "Hello Maverick Juris, I'd like to book a consultation.";
+
+function buildWhatsAppLink(message){
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
+document.querySelectorAll('[data-wa-generic]').forEach(el=>{
+  el.setAttribute('href', buildWhatsAppLink(WHATSAPP_GENERIC_MESSAGE));
+});
+
+/* =========================================================
+   PRACTICE AREAS DATA
+   Add/remove entries here — the grid re-renders automatically.
+   ========================================================= */
+const practiceAreas = [
+  { name:"Tax Law", desc:"Income tax, sales tax and FBR disputes, notices, appeals and compliance planning.", icon:"tax" },
+  { name:"Family Law", desc:"Khula, divorce, custody, maintenance and inheritance matters handled with discretion.", icon:"family" },
+  { name:"Civil Law", desc:"Contract disputes, recovery suits, injunctions and civil litigation across Karachi's courts.", icon:"civil" },
+  { name:"Criminal Law", desc:"Bail, FIR quashing, trial defence and appeals across the criminal justice process.", icon:"criminal" },
+  { name:"Property Law", desc:"Title disputes, possession suits, sale agreements and society/DHA matters.", icon:"property" },
+  { name:"Corporate Law", desc:"Company incorporation, contracts, compliance and commercial structuring.", icon:"corporate" },
+  { name:"Intellectual Property Rights", desc:"Copyright, patents and IP enforcement for creators and businesses.", icon:"ip" },
+  { name:"Trademark Registration", desc:"Brand name and logo registration, opposition and renewal with IPO-Pakistan.", icon:"trademark" },
+  { name:"Cybercrime", desc:"PECA matters — harassment, hacking, data breaches and online fraud complaints.", icon:"cyber" },
+];
+
+const icons = {
+  tax:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+  family:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><path d="M2 21v-2a5 5 0 0 1 5-5h1M13 21v-2a5 5 0 0 1 5-5h1"/></svg>`,
+  civil:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v18M4 7h16M6 7l-3 6a4 4 0 0 0 8 0L8 7M18 7l-3 6a4 4 0 0 0 8 0l-3-6"/></svg>`,
+  criminal:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 3 6v6c0 5 3.8 8.7 9 10 5.2-1.3 9-5 9-10V6l-9-4z"/></svg>`,
+  property:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10.5 12 3l9 7.5M5 9v11h14V9"/></svg>`,
+  corporate:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="14" rx="1"/><path d="M8 7V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v3"/></svg>`,
+  ip:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>`,
+  trademark:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 2 7v6c0 5.2 4 9.6 10 11 6-1.4 10-5.8 10-11V7l-10-5z"/><path d="M9 12l2 2 4-4"/></svg>`,
+  cyber:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
+};
+
+function renderPracticeAreas(){
+  const grid = document.getElementById('practiceGrid');
+  grid.innerHTML = practiceAreas.map(p=>`
+    <article class="practice-card">
+      <div class="practice-icon" aria-hidden="true">${icons[p.icon] || ''}</div>
+      <h3>${p.name}</h3>
+      <p>${p.desc}</p>
+    </article>
+  `).join('');
+}
+renderPracticeAreas();
+
+/* =========================================================
+   OFFENCE FINDER DATA
+   Source: general reference to the Second Schedule, Code of
+   Criminal Procedure (CrPC), Pakistan — covering common
+   Pakistan Penal Code (PPC) offences.
+
+   DEVELOPER NOTE (c) — TO ADD MORE OFFENCES:
+   Push a new object onto the `offenceData` array below with
+   the same shape:
+     {
+       section: "PPC Section number, e.g. '379'",
+       name: "Offence name",
+       description: "One-line description of the act",
+       punishment: "Punishment as prescribed",
+       bailable: true | false,
+       cognizable: true | false,
+       compoundable: "No" | "Yes" | "Yes, with permission of the court" | "N/A",
+       court: "Court empowered to try the offence"
+     }
+   No other code needs to change — the search box filters this
+   array automatically. Always verify entries against the
+   current Second Schedule / any amendments before publishing.
+   ========================================================= */
+const offenceData = [
+  { section:"302", name:"Qatl-i-Amd (Murder)", description:"Intentional causing of death.", punishment:"Death or life imprisonment as ta'zir (qisas may also apply)", bailable:false, cognizable:true, compoundable:"Yes, with permission of the court (subject to qisas/diyat provisions)", court:"Court of Session" },
+  { section:"324", name:"Attempt to Commit Qatl-i-Amd", description:"Act done with intent to commit murder.", punishment:"Up to 10 years imprisonment and fine; life imprisonment if hurt is caused", bailable:false, cognizable:true, compoundable:"Yes, with permission of the court", court:"Court of Session" },
+  { section:"337-A", name:"Hurt (Shajjah/Damiyah etc.)", description:"Causing hurt of various described categories.", punishment:"Varies by category — daman/arsh, imprisonment up to 1 year, or both", bailable:true, cognizable:true, compoundable:"Yes", court:"Magistrate" },
+  { section:"354", name:"Assault or Criminal Force to Woman with Intent to Outrage Modesty", description:"Assault/force against a woman intending to outrage her modesty.", punishment:"Up to 2 years imprisonment, or fine, or both", bailable:false, cognizable:true, compoundable:"No", court:"Magistrate" },
+  { section:"379", name:"Theft", description:"Dishonestly taking movable property out of another's possession.", punishment:"Up to 3 years imprisonment, or fine, or both", bailable:true, cognizable:true, compoundable:"Yes", court:"Magistrate" },
+  { section:"380", name:"Theft in Dwelling House", description:"Theft committed in a building used as a human dwelling.", punishment:"Up to 5 years imprisonment and fine", bailable:false, cognizable:true, compoundable:"Yes", court:"Magistrate" },
+  { section:"382", name:"Theft After Preparation for Death/Hurt to Cause Fear", description:"Theft with preparation to cause death, hurt or restraint to commit or escape after theft.", punishment:"Up to 10 years rigorous imprisonment and fine", bailable:false, cognizable:true, compoundable:"No", court:"Magistrate" },
+  { section:"384", name:"Extortion", description:"Putting a person in fear to dishonestly induce delivery of property.", punishment:"Up to 3 years imprisonment, or fine, or both", bailable:false, cognizable:true, compoundable:"Yes", court:"Magistrate" },
+  { section:"392", name:"Robbery", description:"Theft or extortion aggravated by force or fear of instant harm.", punishment:"Up to 10 years rigorous imprisonment and fine; up to 14 years if committed on highway between sunset and sunrise", bailable:false, cognizable:true, compoundable:"No", court:"Magistrate (Court of Session if on highway at night)" },
+  { section:"395", name:"Dacoity", description:"Robbery committed by five or more persons jointly.", punishment:"Life imprisonment or rigorous imprisonment up to 10 years, and fine", bailable:false, cognizable:true, compoundable:"No", court:"Court of Session" },
+  { section:"406", name:"Criminal Breach of Trust", description:"Dishonest misappropriation of property entrusted to one's care.", punishment:"Up to 3 years imprisonment, or fine, or both", bailable:true, cognizable:false, compoundable:"Yes, with permission of the court", court:"Magistrate" },
+  { section:"409", name:"Criminal Breach of Trust by Public Servant/Agent", description:"Breach of trust by a public servant, banker, or agent.", punishment:"Imprisonment for life, or up to 10 years, and fine", bailable:false, cognizable:true, compoundable:"No", court:"Magistrate of the first class" },
+  { section:"411", name:"Dishonestly Receiving Stolen Property", description:"Receiving or retaining property known to be stolen.", punishment:"Up to 3 years imprisonment, or fine, or both", bailable:true, cognizable:true, compoundable:"Yes", court:"Magistrate" },
+  { section:"420", name:"Cheating and Dishonestly Inducing Delivery of Property", description:"Deceiving a person to dishonestly induce delivery of property or alter a valuable security.", punishment:"Up to 7 years imprisonment and fine", bailable:false, cognizable:true, compoundable:"Yes, with permission of the court", court:"Magistrate of the first class" },
+  { section:"447", name:"Criminal Trespass", description:"Entering property in another's possession with intent to commit an offence or intimidate/insult/annoy.", punishment:"Up to 3 months imprisonment, or fine, or both", bailable:true, cognizable:false, compoundable:"Yes", court:"Any Magistrate" },
+  { section:"448", name:"House-Trespass", description:"Criminal trespass by entering into or remaining in a building.", punishment:"Up to 1 year imprisonment, or fine, or both", bailable:true, cognizable:true, compoundable:"Yes", court:"Any Magistrate" },
+  { section:"452", name:"House-Trespass After Preparation for Hurt", description:"House-trespass having made preparation to cause hurt, assault or wrongful restraint.", punishment:"Up to 7 years rigorous imprisonment and fine", bailable:false, cognizable:true, compoundable:"Yes, with permission of the court", court:"Magistrate of the first class" },
+  { section:"489-F", name:"Dishonestly Issuing a Cheque (Cheque Dishonour)", description:"Issuing a cheque that is dishonoured due to insufficient funds or stopped payment, with dishonest intent.", punishment:"Up to 3 years imprisonment, or fine, or both", bailable:false, cognizable:false, compoundable:"Yes", court:"Magistrate of the first class" },
+  { section:"495", name:"Fraudulent Marriage (Concealment of Prior Marriage)", description:"Deceitfully going through a marriage ceremony while concealing a prior existing marriage.", punishment:"Up to 7 years imprisonment and fine", bailable:false, cognizable:false, compoundable:"No", court:"Court of Session" },
+  { section:"506", name:"Criminal Intimidation", description:"Threatening injury to person, reputation or property to cause alarm.", punishment:"Up to 2 years imprisonment, or fine, or both (up to 7 years for threats of death/grievous hurt)", bailable:true, cognizable:false, compoundable:"Yes", court:"Magistrate" },
+  { section:"509", name:"Insulting Modesty of a Woman (Word, Gesture or Act)", description:"Word, sound, gesture or exhibition intended to insult a woman's modesty.", punishment:"Up to 3 years imprisonment, or fine, or both", bailable:true, cognizable:true, compoundable:"No", court:"Magistrate" },
+  { section:"34", name:"Acts Done by Several Persons in Furtherance of Common Intention", description:"Attaches liability to each person for an act done by several in furtherance of a shared intention (read with the substantive offence).", punishment:"Same as for the substantive offence committed", bailable:"Depends on substantive offence", cognizable:"Depends on substantive offence", compoundable:"Depends on substantive offence", court:"Same as substantive offence" },
+  { section:"109", name:"Punishment of Abetment", description:"Abetting an offence where the act abetted is committed, and no express provision for its punishment exists.", punishment:"Punishment provided for the offence abetted", bailable:"Depends on substantive offence", cognizable:"Depends on substantive offence", compoundable:"Depends on substantive offence", court:"Same as substantive offence" },
+];
+
+const offenceResultsEl = document.getElementById('offenceResults');
+const offenceSearchEl = document.getElementById('offenceSearch');
+
+function tagHtml(bailable){
+  if (typeof bailable !== 'boolean'){
+    return `<span class="tag" style="color:var(--paper-mute);border-color:var(--line);">${bailable}</span>`;
+  }
+  return bailable
+    ? `<span class="tag tag-bailable">Bailable</span>`
+    : `<span class="tag tag-nonbailable">Non-Bailable</span>`;
+}
+
+function renderOffenceCard(o){
+  const waMsg = `Hello Maverick Juris, I'm facing a charge under PPC Section ${o.section} (${o.name}) and would like a consultation.`;
+  return `
+    <div class="docket">
+      <div class="docket-top">
+        <div>
+          <span class="docket-section"><span>PPC Section</span>${o.section}</span>
+          <div class="docket-name">${o.name}</div>
+        </div>
+        ${tagHtml(o.bailable)}
+      </div>
+      <p style="color:var(--paper-dim);font-size:0.92rem;margin-top:10px;">${o.description}</p>
+      <div class="docket-rule"></div>
+      <div class="docket-grid">
+        <div class="docket-field"><span>Punishment</span><strong>${o.punishment}</strong></div>
+        <div class="docket-field"><span>Cognizable</span><strong>${o.cognizable === true ? 'Yes' : o.cognizable === false ? 'No' : o.cognizable}</strong></div>
+        <div class="docket-field"><span>Compoundable</span><strong>${o.compoundable}</strong></div>
+        <div class="docket-field"><span>Court</span><strong>${o.court}</strong></div>
+      </div>
+      <div class="docket-cta">
+        <a class="btn btn-outline btn-sm" href="${buildWhatsAppLink(waMsg)}" target="_blank" rel="noopener">
+          Facing this charge? Ask on WhatsApp →
+        </a>
+      </div>
+    </div>
+  `;
+}
+
+function renderOffenceResults(query){
+  const q = query.trim().toLowerCase();
+  let results = offenceData;
+
+  if (q.length > 0){
+    results = offenceData.filter(o =>
+      o.section.toLowerCase().includes(q) ||
+      o.name.toLowerCase().includes(q) ||
+      o.description.toLowerCase().includes(q)
+    );
+  }
+
+  if (results.length === 0){
+    offenceResultsEl.innerHTML = `<div class="finder-empty">No matching offence found. Try a different keyword or PPC section number — or <a href="${buildWhatsAppLink('Hello Maverick Juris, I could not find my offence on your site and would like to ask about my case.')}" target="_blank" rel="noopener" style="color:var(--brass-bright);">ask us directly on WhatsApp</a>.</div>`;
+    return;
+  }
+
+  // Limit initial (empty-query) view to a manageable list; full list appears once user types.
+  const list = q.length === 0 ? results.slice(0, 6) : results;
+  offenceResultsEl.innerHTML = list.map(renderOffenceCard).join('');
+}
+
+renderOffenceResults('');
+offenceSearchEl.addEventListener('input', (e)=> renderOffenceResults(e.target.value));
+
+/* =========================================================
+   ACTS & STATUTES DATA
+
+   DEVELOPER NOTE (d) — TO ADD MORE ACTS/STATUTES:
+   Push a new object onto `actsAndStatutes` below with the
+   shape:
+     { actName: "Full name of the Act", year: "1860",
+       summary: "One or two sentence plain-language summary.",
+       link: "https://official-or-reliable-source-url" }
+   The accordion re-renders automatically — no layout code
+   needs to change.
+   ========================================================= */
+const actsAndStatutes = [
+  { actName:"Pakistan Penal Code (PPC)", year:"1860", summary:"The primary criminal code of Pakistan, defining offences from theft and cheating to murder and hurt, and prescribing their punishments.", link:"https://www.pakistancode.gov.pk/" },
+  { actName:"Code of Criminal Procedure (CrPC)", year:"1898", summary:"Sets out the procedure for investigation, arrest, bail, trial and appeal in criminal cases — including the Second Schedule referenced in the Offence Finder above.", link:"https://www.pakistancode.gov.pk/" },
+  { actName:"Code of Civil Procedure (CPC)", year:"1908", summary:"Governs procedure in civil suits — filing, evidence, execution of decrees and appeals in Pakistan's civil courts.", link:"https://www.pakistancode.gov.pk/" },
+  { actName:"Qanun-e-Shahadat Order (Law of Evidence)", year:"1984", summary:"Governs what evidence is admissible and how it is proved in Pakistani courts, both civil and criminal.", link:"https://www.pakistancode.gov.pk/" },
+  { actName:"Muslim Family Laws Ordinance", year:"1961", summary:"Regulates marriage registration, polygamy, divorce (talaq) procedure, and maintenance for Muslim families in Pakistan.", link:"https://www.pakistancode.gov.pk/" },
+  { actName:"West Pakistan Family Courts Act", year:"1964", summary:"Establishes Family Courts and their exclusive jurisdiction over dissolution of marriage, dower, maintenance, custody and guardianship.", link:"https://www.pakistancode.gov.pk/" },
+  { actName:"Income Tax Ordinance", year:"2001", summary:"Governs the assessment, filing and collection of income tax, along with appeals against FBR notices and assessments.", link:"https://www.fbr.gov.pk/" },
+  { actName:"Sales Tax Act", year:"1990", summary:"Regulates sales tax registration, invoicing, input/output adjustments and audits for businesses in Pakistan.", link:"https://www.fbr.gov.pk/" },
+  { actName:"Companies Act", year:"2017", summary:"Governs incorporation, governance, compliance and dissolution of companies registered with the SECP.", link:"https://www.secp.gov.pk/" },
+  { actName:"Trade Marks Ordinance", year:"2001", summary:"Provides the framework for registering, protecting and enforcing trademarks in Pakistan through IPO-Pakistan.", link:"https://ipo.gov.pk/" },
+  { actName:"Copyright Ordinance", year:"1962", summary:"Protects literary, artistic, musical and software works, and sets out remedies for infringement.", link:"https://ipo.gov.pk/" },
+  { actName:"Prevention of Electronic Crimes Act (PECA)", year:"2016", summary:"Pakistan's principal cybercrime law — covering unauthorized access, online harassment, identity theft and electronic fraud.", link:"https://www.fia.gov.pk/" },
+  { actName:"Transfer of Property Act", year:"1882", summary:"Governs how immovable property is sold, mortgaged, leased, gifted or exchanged in Pakistan.", link:"https://www.pakistancode.gov.pk/" },
+  { actName:"Registration Act", year:"1908", summary:"Sets out which documents (including many property transactions) must be registered, and the procedure for doing so.", link:"https://www.pakistancode.gov.pk/" },
+  { actName:"Specific Relief Act", year:"1877", summary:"Provides civil remedies such as specific performance of contracts, injunctions and declaratory suits.", link:"https://www.pakistancode.gov.pk/" },
+];
+
+const actsListEl = document.getElementById('actsList');
+
+function renderActs(){
+  actsListEl.innerHTML = actsAndStatutes.map((a, i)=>`
+    <div class="act-item" data-index="${i}">
+      <button class="act-trigger" aria-expanded="false" aria-controls="act-panel-${i}">
+        <span class="act-title">${a.actName}</span>
+        <span style="display:flex;align-items:center;gap:14px;">
+          <span class="act-year">${a.year}</span>
+          <span class="act-plus" aria-hidden="true"></span>
+        </span>
+      </button>
+      <div class="act-panel" id="act-panel-${i}">
+        <div class="act-panel-inner">
+          <p>${a.summary}</p>
+          ${a.link ? `<p style="margin-top:10px;"><a href="${a.link}" target="_blank" rel="noopener">Read more →</a></p>` : ''}
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // ===== ACCORDION TOGGLE LOGIC =====
+  actsListEl.querySelectorAll('.act-item').forEach(item=>{
+    const trigger = item.querySelector('.act-trigger');
+    const panel = item.querySelector('.act-panel');
+    trigger.addEventListener('click', ()=>{
+      const isOpen = item.classList.contains('open');
+      // close all
+      actsListEl.querySelectorAll('.act-item.open').forEach(openItem=>{
+        openItem.classList.remove('open');
+        openItem.querySelector('.act-panel').style.maxHeight = null;
+        openItem.querySelector('.act-trigger').setAttribute('aria-expanded','false');
+      });
+      // open this one if it was closed
+      if (!isOpen){
+        item.classList.add('open');
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        trigger.setAttribute('aria-expanded','true');
+      }
+    });
+  });
+}
+renderActs();
+
+/* =========================================================
+   CONTACT FORM LOGIC (client-side only — see backend note above)
+   ========================================================= */
+const contactForm = document.getElementById('contactForm');
+const formSuccess = document.getElementById('formSuccess');
+
+contactForm.addEventListener('submit', function(e){
+  e.preventDefault();
+  if (!contactForm.checkValidity()){
+    contactForm.reportValidity();
+    return;
+  }
+
+  // Collected values — wire these into a real backend per the note above.
+  const formValues = {
+    name: document.getElementById('fName').value,
+    phone: document.getElementById('fPhone').value,
+    city: document.getElementById('fCity').value,
+    area: document.getElementById('fArea').value,
+    description: document.getElementById('fDesc').value,
+  };
+  // console.log('Contact form submission (wire to backend):', formValues);
+
+  contactForm.style.display = 'none';
+  formSuccess.classList.add('show');
+});
+
+/* =========================================================
+   MOBILE NAV TOGGLE
+   ========================================================= */
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+
+navToggle.addEventListener('click', ()=>{
+  const open = navLinks.classList.toggle('open');
+  navToggle.classList.toggle('open', open);
+  navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+
+navLinks.querySelectorAll('a').forEach(link=>{
+  link.addEventListener('click', ()=>{
+    navLinks.classList.remove('open');
+    navToggle.classList.remove('open');
+    navToggle.setAttribute('aria-expanded','false');
+  });
+});
+
+/* =========================================================
+   SCROLL-REVEAL ANIMATIONS
+   ========================================================= */
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if (entry.isIntersecting){
+      entry.target.classList.add('is-visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+revealEls.forEach(el=> revealObserver.observe(el));
+
+/* =========================================================
+   FOOTER YEAR
+   ========================================================= */
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
